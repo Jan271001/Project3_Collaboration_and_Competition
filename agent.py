@@ -13,13 +13,23 @@ BUFFER_SIZE = int(1e5)  # replay buffer size
 BATCH_SIZE = 128        # minibatch size
 GAMMA = 0.99            # discount factor
 TAU = 1e-3              # for soft update of target parameters
+LR_ACTOR = 1e-4         # learning rate of the actor 
+LR_CRITIC = 1e-3        # learning rate of the critic
+LEARN_EVERY = 1         # intervall learning
+NUMBER_LEARNING = 1     # Number of Batches to learn from in one step
+
+"""
+BUFFER_SIZE = int(1e5)  # replay buffer size
+BATCH_SIZE = 128        # minibatch size
+GAMMA = 0.99            # discount factor
+TAU = 1e-3              # for soft update of target parameters
 LR_ACTOR = 1e-4         # learning rate of the actor
 LR_CRITIC = 1e-3        # learning rate of the critic
 LEARN_EVERY = 1         # learn every LEARN_EVERY steps
 LEARN_NB = 1            # how often to execute the learn-function every LEARN_EVERY steps
+"""
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-
 
 class Agent(object):
     """Interacts with and learns from the environment."""
@@ -71,7 +81,7 @@ class Agent(object):
         self.i_learn = (self.i_learn + 1) % LEARN_EVERY
         # Learn every LEARN_EVERY steps if enough samples are available in memory
         if len(self.memory) > BATCH_SIZE and self.i_learn == 0:
-            for _ in range(LEARN_NB):
+            for _ in range(NUMBER_LEARNING):
                 experiences = self.memory.sample()
                 self.learn(experiences, GAMMA)
 

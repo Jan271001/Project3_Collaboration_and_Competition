@@ -11,12 +11,12 @@ import torch.optim as optim
 
 BUFFER_SIZE = int(1e5)  # replay buffer size
 BATCH_SIZE = 128        # minibatch size
-GAMMA = 0.99            # discount factor
+GAMMA = 0.995           # discount factor
 TAU = 1e-3              # for soft update of target parameters
 LR_ACTOR = 1e-4         # learning rate of the actor 
-LR_CRITIC = 1e-3        # learning rate of the critic
-LEARN_EVERY = 1         # intervall learning
-NUMBER_LEARNING = 1     # Number of Batches to learn from in one step
+LR_CRITIC = 5e-3        # learning rate of the critic
+LEARN_EVERY = 4         # intervall learning
+NUMBER_LEARNING = 3     # Number of Batches to learn from in one step
 
 """
 BUFFER_SIZE = int(1e5)  # replay buffer size
@@ -45,7 +45,6 @@ class Agent(object):
         self.state_size = state_size
         self.action_size = action_size
         self.seed = random.seed(random_seed)
-        self.i_learn = 0  # for learning every n steps
 
         # Actor Network (w/ Target Network)
         self.actor_local = Actor(state_size, action_size, random_seed).to(device)
@@ -71,17 +70,16 @@ class Agent(object):
         for target_param, source_param in zip(target.parameters(), source.parameters()):
             target_param.data.copy_(source_param.data)
 
-    def step(self, states, actions, actions_other_player, rewards, next_states, next_states_other_players, dones):
+    def step(self, states, actions, actions_second_player, rewards, next_states, next_states_second_players, dones, timestep):
         """Save experience in replay memory, and use random sample from buffer to learn."""
         # Save experiences / rewards
-        for state, action, action_other_player, reward, next_state, next_state_other_player, done \
-                in zip(states, actions, actions_other_player, rewards, next_states, next_states_other_players, dones):
-            self.memory.add(state, action, action_other_player, reward, next_state, next_state_other_player, done)
+        for state, action, action_second_player, reward, next_state, next_state_second_player, done \
+                in zip(states, actions, actions_second_player, rewards, next_states, next_states_second_players, dones):
+            self.memory.add(state, action, action_second_player, reward, next_state, next_state_second_player, done)
 
-        self.i_learn = (self.i_learn + 1) % LEARN_EVERY
         # Learn every LEARN_EVERY steps if enough samples are available in memory
-        if len(self.memory) > BATCH_SIZE and self.i_learn == 0:
-            for _ in range(NUMBER_LEARNING):
+        if len(self.memory) > BATCH_SIZE and (timestep+1)%LEARN_EVERY == 0:
+            for i in range(NUMBER_LEARNING):
                 experiences = self.memory.sample()
                 self.learn(experiences, GAMMA)
 

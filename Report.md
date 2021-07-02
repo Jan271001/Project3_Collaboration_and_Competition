@@ -19,41 +19,41 @@ The Replay-Buffer and target-networks, one for the critic and one for the actor.
 
 ### Actor
 
-Input Layer:        24 Nodes
+>Input Layer: 24 Nodes
 
-First Hidden Layer (ReLu): 128 Nodes
+>First Hidden Layer (ReLu): 128 Nodes
 
-Batch-Normalization-Layer
+>Batch-Normalization-Layer
 
-Second Hidden Layer (ReLu): 128 Nodes
+>Second Hidden Layer (ReLu): 128 Nodes
 
-Output Layer (tanh):        4 Nodes
+>Output Layer (tanh): 4 Nodes
 
 ### Critic
 
-Input Layer:        28 Nodes
+>Input Layer: 28 Nodes
 
-First Hidden Layer (ReLu): 128 Nodes
+>First Hidden Layer (ReLu): 128 Nodes
 
-Batch-Normalization-Layer
+>Batch-Normalization-Layer
 
-Second Hidden Layer (ReLu): 128 Nodes
+>Second Hidden Layer (ReLu): 128 Nodes
 
-Output Layer (tanh):        1 Node
+>Output Layer (tanh): 1 Node
 
 ### Hyperparameters
 
-Learning Rate (Actor):   1e-4
+>Learning Rate (Actor):   1e-4
 
-Learning Rate (Critic):  5e-3
+>Learning Rate (Critic):  5e-3
 
-Discount Rate:           0.995
+>Discount Rate:           0.995
 
-Noise Decay:             0.999
+>Noise Decay:             0.999
 
-Softupdate Rate:         1e-3
+>Softupdate Rate:         1e-3
 
-Random Seed:             1
+>Random Seed:             1
 
 ### Pseudo-Code
 

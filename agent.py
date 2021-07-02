@@ -18,17 +18,6 @@ LR_CRITIC = 5e-3        # learning rate of the critic
 LEARN_EVERY = 4         # intervall learning
 NUMBER_LEARNING = 3     # Number of Batches to learn from in one step
 
-"""
-BUFFER_SIZE = int(1e5)  # replay buffer size
-BATCH_SIZE = 128        # minibatch size
-GAMMA = 0.99            # discount factor
-TAU = 1e-3              # for soft update of target parameters
-LR_ACTOR = 1e-4         # learning rate of the actor
-LR_CRITIC = 1e-3        # learning rate of the critic
-LEARN_EVERY = 1         # learn every LEARN_EVERY steps
-LEARN_NB = 1            # how often to execute the learn-function every LEARN_EVERY steps
-"""
-
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 class Agent(object):
@@ -108,17 +97,17 @@ class Agent(object):
             experiences (Tuple[torch.Tensor]): tuple of (s, a, a_2, r, s', s'_2, done) tuples
             gamma (float): discount factor
         """
-        states, actions, actions_other_player, rewards, next_states, next_states_other_player, dones = experiences
+        states, actions, actions_second_player, rewards, next_states, next_states_second_player, dones = experiences
 
         # ---------------------------- update critic ---------------------------- #
         # Get predicted next-state actions (also for the other player) and Q values from target models
         actions_next = self.actor_target(next_states)
-        actions_next_other_player = self.actor_target(next_states_other_player)
-        Q_targets_next = self.critic_target(next_states, actions_next, actions_next_other_player)
+        actions_next_second_player = self.actor_target(next_states_second_player)
+        Q_targets_next = self.critic_target(next_states, actions_next, actions_next_second_player)
         # Compute Q targets for current states (y_i)
         Q_targets = rewards + (gamma * Q_targets_next * (1 - dones))
         # Current expected Q-values
-        Q_expected = self.critic_local(states, actions, actions_other_player)
+        Q_expected = self.critic_local(states, actions, actions_second_player)
         # Compute critic loss
         critic_loss = F.mse_loss(Q_expected, Q_targets)
         # Minimize the loss
@@ -131,7 +120,7 @@ class Agent(object):
         # ---------------------------- update actor ---------------------------- #
         # Compute actor loss
         actions_pred = self.actor_local(states)
-        actor_loss = -self.critic_local(states, actions_pred, actions_other_player).mean()
+        actor_loss = -self.critic_local(states, actions_pred, actions_second_player).mean()
         # Minimize the loss
         self.actor_optimizer.zero_grad()
         actor_loss.backward()

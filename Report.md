@@ -2,7 +2,7 @@
 
 ## The result
 
-![Plot of rewards](CPictures/Performace.png)
+![Plot of rewards](Pictures/Performace.png)
 
 ## The algorithm
 

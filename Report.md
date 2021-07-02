@@ -78,7 +78,7 @@ In pseudocode the MADDPG-Algorithm looks like following:
 
 ## Annotation
 
-In my opinon it's important to mention, that due to the randomness of the first episodes the repeteability of the porject is only partly given. The actions taken in the first few episodes have a very high impact on the trainings duration. In numbers I got several trainings which needed over 3000 episodes to train but also some that needed only round about 1000.
+In my opinon it's important to mention, that due to the randomness of the first episodes the repeteability of the porject is only partly given. The actions taken in the first few episodes have a very high impact on the duration of the training. In numbers I got several trainings which needed over 3000 episodes to train but also some that needed only round about 1000.
 
 ## Future Ideas
 

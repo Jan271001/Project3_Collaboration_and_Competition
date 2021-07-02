@@ -13,8 +13,9 @@ For this project I used a little addapted version of the MADDPG-Algorithm (Multi
 ### Overall description
 
 In order to fullfill the task I use a multi-agent-actor-critic approach. My implementation works with 2 seperate neural networks for each agent. One for the actor 
-and one for the critic. Both architectures can be seen underneath.It also uses the target network approach.To update the target networks a soft update function is used.
-Additionally the used algorithm is an of policy algorithm, which means it uses a Replay Buffer to store previous interactions and learn from them. All information of the step including the actions of both agents are stored in one sample.
+and one for the critic. Both architectures can be seen underneath. It also uses the target network approach. To update the target networks a soft update function is used.
+Additionally the used algorithm is an off-policy algorithm, which means it uses a Replay Buffer to store previous interactions and learn from them. All information of the step including the actions of both agents are stored in one sample. It's important to mention, that the existence of multiple agents with differnt policys could cause instationarity of the environment. 
+This could lead to poorly performing agents and instability in learning. To solve this problem the critic of every single agent knows also about the policys and actions of the other agents and could use this information two calculate the Q-value. In Code this is done by adding the actions of every agent to the input of the critic network.
 
 ### Net Architecture
 
@@ -77,7 +78,7 @@ In pseudocode the MADDPG-Algorithm looks like following:
 
 ## Annotation
 
-
+In my opinon it's important to mention, that due to the randomness of the first episodes the repeteability of the porject is only partly given. The actions taken in the first few episodes have a very high impact on the trainings duration. In numbers I got several trainings which needed over 3000 episodes to train but also some that needed only round about 1000.
 
 ## Future Ideas
 

@@ -4,19 +4,27 @@
 
 ![Plot of rewards](Pictures/Performance.png)
 
+The agents were able to solve the environment in 1375 episodes. The max reward over both agents was 0.58688 over 100 consecutive episodes.
+
 ## The algorithm
 
-For this project I used the MADDPG-Algorithm (Multi Agent Deep Deterministic Policy Gradient)
+For this project I used a little addapted version of the MADDPG-Algorithm (Multi Agent Deep Deterministic Policy Gradient)
 
 ### Overall description
 
-In order to fullfill the task I use a multi-agent-actor-critic approach.
+In order to fullfill the task I use a multi-agent-actor-critic approach. My implementation works with 2 seperate neural networks for each agent. One for the actor 
+and one for the critic. Both architectures can be seen underneath.It also uses the target network approach.To update the target networks a soft update function is used.
+Additionally the used algorithm is an of policy algorithm, which means it uses a Replay Buffer to store previous interactions and learn from them. All information of the step including the actions of both agents are stored in one sample.
 
 ### Net Architecture
 
 ### Actor
 
 The actor-network is a simple feed-forward network
+
+Input: The state of the environment
+
+Output: The action to take
 
 >Input Layer: 24 Nodes (state size)
 
@@ -30,9 +38,12 @@ The actor-network is a simple feed-forward network
 
 ### Critic
 
-The critic-network is a simple feed-forward network
+The critic-network is a simple feed-forward network.
 
->Input Layer: 28 Nodes (state size + actions of both agents)
+Input: The state of the environment + actions of the first agent + actions of the second agent
+Output: Q-value
+
+>Input Layer: 28 Nodes (state size + 2*action size)
 
 >First Hidden Layer (ReLu): 128 Nodes
 
@@ -41,6 +52,8 @@ The critic-network is a simple feed-forward network
 >Second Hidden Layer (ReLu): 128 Nodes
 
 >Output Layer (tanh): 1 Node
+
+(It's important to mention that concating the actions in the first layer causes a bost in performance of the implementation)
 
 ### Hyperparameters
 

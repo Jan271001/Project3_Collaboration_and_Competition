@@ -20,17 +20,25 @@ The Replay-Buffer and target-networks, one for the critic and one for the actor.
 ### Actor
 
 Input Layer:        24 Nodes
+
 First Hidden Layer (ReLu): 128 Nodes
-Batch-Normlayer
+
+Batch-Normalization-Layer
+
 Second Hidden Layer (ReLu): 128 Nodes
+
 Output Layer (tanh):        4 Nodes
 
 ### Critic
 
 Input Layer:        28 Nodes
+
 First Hidden Layer (ReLu): 128 Nodes
-Batch-Normlayer
+
+Batch-Normalization-Layer
+
 Second Hidden Layer (ReLu): 128 Nodes
+
 Output Layer (tanh):        1 Node
 
 ### Hyperparameters

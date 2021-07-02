@@ -74,7 +74,7 @@ Output: Q-value
 
 In pseudocode the MADDPG-Algorithm looks like following:
 
-![Pseudo-Code-MADDPG](Pseudo_Code_MADDPG.png)
+![Pseudo-Code-MADDPG](Pictures/MADDPG_pseudo_code.png)
 
 ## Annotation
 

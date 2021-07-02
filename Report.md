@@ -82,4 +82,4 @@ In my opinon it's important to mention, that due to the randomness of the first 
 
 ## Future Ideas
 
-Allthough the result with this algorithm fullfill all necessary requirements, there are a few more things I like to try. At first I want to know what the maximum for this Code is. So I like to adjust the hyperparameters network-architectueres and give it some more trys. Additionaly I like to try Prioritized Experience Replays, witch could improve the learning effects gained from previous interactions.
+Allthough the result with this algorithm fullfill all necessary requirements, there are a few more things I like to try. At first I want to know what the maximum for this Code is. So I like to adjust the hyperparameters network-architectueres and give it some more trys. Additionaly I like to try Prioritized Experience Replays, witch could improve the learning effects gained from previous interactions. Also I like to try better ways to generate the actions for the second agent.

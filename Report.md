@@ -10,13 +10,15 @@ For this project I used the MADDPG-Algorithm (Multi Agent Deep Deterministic Pol
 
 ### Overall description
 
-
+In order to fullfill the task I use a multi-agent-actor-critic approach. In this algorithm both agents  
 
 ### Net Architecture
 
 ### Actor
 
->Input Layer: 24 Nodes
+The actor-network is a simple feed-forward network
+
+>Input Layer: 24 Nodes (state size)
 
 >First Hidden Layer (ReLu): 128 Nodes
 
@@ -24,11 +26,13 @@ For this project I used the MADDPG-Algorithm (Multi Agent Deep Deterministic Pol
 
 >Second Hidden Layer (ReLu): 128 Nodes
 
->Output Layer (tanh): 4 Nodes
+>Output Layer (tanh): 2 Nodes (action size)
 
 ### Critic
 
->Input Layer: 28 Nodes
+The critic-network is a simple feed-forward network
+
+>Input Layer: 28 Nodes (state size + actions of both agents)
 
 >First Hidden Layer (ReLu): 128 Nodes
 

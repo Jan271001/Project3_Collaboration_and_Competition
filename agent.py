@@ -182,9 +182,9 @@ class ReplayBuffer:
         self.experience = namedtuple("Experience", field_names=["state", "action", "action_other_player", "reward", "next_state", "next_state_other_player", "done"])
         self.seed = random.seed(seed)
 
-    def add(self, state, action, action_other_player, reward, next_state, next_state_other_player, done):
+    def add(self, state, action, action_second_player, reward, next_state, next_state_second_player, done):
         """Add a new experience to memory."""
-        e = self.experience(state, action, action_other_player, reward, next_state, next_state_other_player, done)
+        e = self.experience(state, action, action_second_player, reward, next_state, next_state_second_player, done)
         self.memory.append(e)
 
     def sample(self):
@@ -193,16 +193,16 @@ class ReplayBuffer:
 
         states = torch.from_numpy(np.vstack([e.state for e in experiences if e is not None])).float().to(device)
         actions = torch.from_numpy(np.vstack([e.action for e in experiences if e is not None])).float().to(device)
-        actions_other_player = torch.from_numpy(np.vstack([e.action_other_player for e in experiences if e is not None])).float().to(device)
+        actions_second_player = torch.from_numpy(np.vstack([e.action_other_player for e in experiences if e is not None])).float().to(device)
         rewards = torch.from_numpy(np.vstack([e.reward for e in experiences if e is not None])).float().to(device)
         next_states = torch.from_numpy(np.vstack([e.next_state for e in experiences if e is not None])).float().to(
             device)
-        next_states_other_player = torch.from_numpy(np.vstack([e.next_state_other_player for e in experiences if e is not None])).float().to(
+        next_states_second_player = torch.from_numpy(np.vstack([e.next_state_second_player for e in experiences if e is not None])).float().to(
             device)
         dones = torch.from_numpy(np.vstack([e.done for e in experiences if e is not None]).astype(np.uint8)).float().to(
             device)
 
-        return states, actions, actions_other_player, rewards, next_states, next_states_other_player, dones
+        return states, actions, actions_second_player, rewards, next_states, next_states_second_player, dones
 
     def __len__(self):
         """Return the current size of internal memory."""

@@ -5,7 +5,7 @@ The third project in the udacity deep-reinforcement-learning nanodegree
 This GitHub repository is designed to solve the Unity ML-Agents Tennis Environment.
 
 ## The environment
-![Unity ML-Agents Tennis Environment](Pictures/Tennist.gif)
+![Unity ML-Agents Tennis Environment](Udacity_Collab_and_Comp.gif)
 
 The agent in this repository is designed to move a double-jointed arm to a stiring target location. A reward of +0.1 is provided for each timestep that the agent's hand is in the goal location. The goal of the agent is to maintain its position at the target location for as many time steps as possible.
 

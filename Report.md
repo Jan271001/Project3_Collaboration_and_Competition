@@ -2,7 +2,7 @@
 
 ## The result
 
-![Plot of rewards](Collaboration_and_Competition_Performace.png)
+![Plot of rewards](CPictures/Performace.png)
 
 ## The algorithm
 
@@ -10,7 +10,7 @@ For this project I used the MADDPG-Algorithm (Multi Agent Deep Deterministic Pol
 
 ### Overall description
 
-In order to fullfill the task I use a multi-agent-actor-critic approach. In this algorithm both agents  
+In order to fullfill the task I use a multi-agent-actor-critic approach.
 
 ### Net Architecture
 
